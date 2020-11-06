@@ -33,6 +33,9 @@ class RolesSeeder extends Seeder
         foreach (config('authorization.users') as $user) {
             $newUser = User::whereEmail($user['email'])->first() ??  new User();
 
+            // hash the password
+            $user['password'] = bcrypt($user['password']);
+
             // Get user array without role
             $userExceptRole = $user;
             unset($userExceptRole['role']);
