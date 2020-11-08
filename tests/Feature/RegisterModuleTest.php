@@ -14,18 +14,24 @@ class RegisterModuleTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function newUser()
+    {
+        return  [
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'email' => 'test@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ];
+    }
+
     /** @test */
     public function automatically_make_a_profile_when_a_user_registers()
     {
         Event::fake();
         $this->withExceptionHandling();
 
-        $response = $this->post(route('register'), [
-            'name' => 'test user',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password'
-        ]);
+        $response = $this->post(route('register'), $this->newUser());
 
         Event::assertDispatched(Registered::class);
         $this->assertDatabaseHas('users', ['email' => 'test@example.com']);
@@ -37,12 +43,8 @@ class RegisterModuleTest extends TestCase
     /** @test */
     public function user_is_redirected_to_appropriate_route_after_registering()
     {
-        $response = $this->post(route('register'), [
-            'name' => 'test user',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password'
-        ]);
+        $this->withExceptionHandling();
+        $response = $this->post(route('register'), $this->newUser());
 
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
