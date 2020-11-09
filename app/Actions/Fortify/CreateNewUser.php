@@ -25,6 +25,8 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
+            'dob' => ['required', 'date'],
+            'gender' => ['required'], 
         ])->validate();
 
         $user = User::create([
@@ -32,6 +34,8 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => $input['last_name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'dob' => $input['dob'],
+            'gender' => $input['gender'], 
         ]);
 
         $user->profile()->save(new Profile);

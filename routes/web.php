@@ -25,4 +25,4 @@ Route::resources([
     'profiles' => \App\Http\Controllers\ProfileController::class,
 ]);
 
-Route::view('dashboard', 'dashboard-theme');
+// Route::view('dashboard', 'dashboard-theme');

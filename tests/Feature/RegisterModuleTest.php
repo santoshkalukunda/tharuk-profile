@@ -21,13 +21,16 @@ class RegisterModuleTest extends TestCase
             'last_name' => 'User',
             'email' => 'test@example.com',
             'password' => 'password',
-            'password_confirmation' => 'password'
+            'password_confirmation' => 'password',
+            'dob' => now()->subYear(15),
+            'gender' => 'male'
         ];
     }
 
     /** @test */
     public function automatically_make_a_profile_when_a_user_registers()
     {
+        $this->withExceptionHandling();
         Event::fake();
         $this->withExceptionHandling();
 
