@@ -15,7 +15,7 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('profiles.show', Auth::user()) }}" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('profiles.show', Auth::user()->profile) }}" :active="request()->routeIs('dashboard')">
                         {{ Auth::user()->full_name }}
                     </x-jet-nav-link>
                 </div>
