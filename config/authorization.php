@@ -14,13 +14,15 @@ return [
     */
     'users' => [
         [
-            'name' => 'James Bhatta',
+            'first_name' => 'James',
+            'last_name' => 'Bhatta',
             'email' => 'jmsbhatta@gmail.com',
             'password' => 'password',
             'role' => 'admin'
         ],
         [
-            'name' => 'John Doe',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'john@gexample.com',
             'password' => 'password',
             'role' => 'user'

@@ -54,7 +54,7 @@ class RolesSeeder extends Seeder
             $newUser->syncRoles([$role]);
 
             // Push user to console table
-            array_push($content, [$user['name'], $user['email'], $user['password'], $user['role'], $action]);
+            array_push($content, [$user['first_name'] . ' ' . $user['last_name'], $user['email'], $user['password'], $user['role'], $action]);
         }
 
         $this->command->table($headers, $content);
