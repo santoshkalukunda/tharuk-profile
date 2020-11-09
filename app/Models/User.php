@@ -30,6 +30,8 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'dob',
+        'gender',
     ];
 
     /**
@@ -51,6 +53,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'dob' => 'date',
     ];
 
     /**
@@ -62,6 +65,15 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'dob',
+    ];
+
     public function getFullNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
@@ -70,6 +82,16 @@ class User extends Authenticatable
     public function getNameAttribute()
     {
         return $this->full_name;
+    }
+
+    public function getJoinedDateAttribute()
+    {
+        return $this->created_at->toFormattedDateString();
+    }
+
+    public function getBirthdayAttribute()
+    {
+        return $this->dob->toFormattedDateString();
     }
 
     public function profile()

@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Profile;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
@@ -25,6 +27,20 @@ class RegisterModuleTest extends TestCase
             'dob' => now()->subYear(15),
             'gender' => 'male'
         ];
+    }
+
+    /** @test */
+    public function all_values_are_saved_to_database()
+    {
+        $this->post(route('register'), $this->newUser());
+
+        $this->assertDatabaseHas('users',  [
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'email' => 'test@example.com',
+            'dob' => now()->subYear(15),
+            'gender' => 'male'
+        ]);
     }
 
     /** @test */
