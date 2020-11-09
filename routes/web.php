@@ -24,3 +24,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::resources([
     'profiles' => \App\Http\Controllers\ProfileController::class,
 ]);
+
+Route::view('dashboard', 'dashboard-theme');
