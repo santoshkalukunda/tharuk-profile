@@ -30,9 +30,10 @@ class RegisterModuleTest extends TestCase
     /** @test */
     public function automatically_make_a_profile_when_a_user_registers()
     {
-        $this->withExceptionHandling();
-        Event::fake();
-        $this->withExceptionHandling();
+        $this->withOutExceptionHandling();
+        Event::fake([
+            Registered::class
+        ]);
 
         $response = $this->post(route('register'), $this->newUser());
 

@@ -38,7 +38,7 @@ class CreateNewUser implements CreatesNewUsers
             'gender' => $input['gender'], 
         ]);
 
-        $user->profile()->save(new Profile);
+        $user->profile()->create();
 
         return $user;
     }
